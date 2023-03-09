@@ -1,0 +1,25 @@
+.formRegister {
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputError {
+  border: 1px solid rgb(209, 47, 47);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.sesionGoogle {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  img {
+    width: 60px;
+    height: 60px;
+  }
+}
