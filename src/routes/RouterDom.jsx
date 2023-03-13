@@ -8,6 +8,7 @@ import PublicRouter from "./PublicRouter";
 import Error404 from "../components/error404/Error404";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
+import Navbar from "../components/navbar/Navbar";
 
 const RouterDom = () => {
   const [isLogin, setIsLogin] = useState(undefined);
@@ -34,15 +35,17 @@ const RouterDom = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<PrivateRoute isAuth={isLogin} />}>
-          <Route path="/" element={<Home />} />
-        </Route>
+        <Route path="/" element={<Navbar isAuth={isLogin} />}>
+          <Route element={<PrivateRoute isAuth={isLogin} />}>
+            <Route index element={<Home />} />
+          </Route>
 
-        <Route element={<PublicRouter isAuth={isLogin} />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route element={<PublicRouter isAuth={isLogin} />}>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+          <Route path="*" element={<Error404 />} />
         </Route>
-        <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>
   );

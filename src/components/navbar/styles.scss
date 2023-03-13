@@ -1,0 +1,30 @@
+@import "../../vars.scss";
+.icon {
+  font-size: 30px;
+  color: $white;
+}
+.navBar {
+  background-color: #000;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  color: $white;
+  justify-content: space-between;
+  gap: 10px;
+  .itemNavs {
+    display: flex;
+    gap: 10px;
+  }
+
+  .nav_item {
+    color: $white;
+  }
+
+  figure {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}

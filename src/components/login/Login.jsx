@@ -8,6 +8,8 @@ import {
   userLoginProviderAsync,
 } from "../../redux/actions/userAction";
 import "./styles.scss";
+import { AiFillGoogleCircle } from "react-icons/ai";
+import { AiFillFacebook } from "react-icons/ai";
 
 const Login = () => {
   const {
@@ -40,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <section className="SecFormLogin">
       <form className="formRegister" onSubmit={handleSubmit(onSubmitForm)}>
         <label htmlFor="">email</label>
         <input
@@ -57,34 +59,28 @@ const Login = () => {
         <button type="submit">Iniciar sesión</button>
         <span>¿Notienes una cuenta?</span>
         {user.error ? <span>usuario o contraseña invalida</span> : <></>}
-        <Link to="/register">Registrarse</Link>
-      </form>
+        <Link to="/register" className="btnRegister">
+          Registrarse
+        </Link>
 
-      <figure
-        className="sesionGoogle"
-        onClick={() => {
-          sesionProvider(google);
-        }}
-      >
-        <img
-          src="https://antoniofernandez.com/assets/blog/node-google-login.png"
-          alt=""
-          width={50}
-        />
-      </figure>
-      <figure
-        className="sesionGoogle"
-        onClick={() => {
-          sesionProvider(facebook);
-        }}
-      >
-        <img
-          src="https://thumbs.dreamstime.com/b/icono-del-logo-de-facebook-voronezh-rusia-noviembre-circular-en-color-azul-164585774.jpg"
-          alt=""
-          width={50}
-        />
-      </figure>
-    </>
+        <section className="secIcons">
+          <figure
+            onClick={() => {
+              sesionProvider(google);
+            }}
+          >
+            <AiFillGoogleCircle className="icons" />
+          </figure>
+          <figure
+            onClick={() => {
+              sesionProvider(facebook);
+            }}
+          >
+            <AiFillFacebook className="icons" />
+          </figure>
+        </section>
+      </form>
+    </section>
   );
 };
 

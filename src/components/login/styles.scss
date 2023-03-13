@@ -1,8 +1,57 @@
+@import "../../vars.scss";
+.SecFormLogin {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .formRegister {
   gap: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 400px;
+
+  button {
+    background-color: $purple;
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: $white;
+    font-weight: 600;
+    transition: 0.5s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btnRegister {
+    background-color: $yellow;
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: $mainColor;
+    font-weight: 600;
+    transition: 0.5s;
+    &:hover {
+      background-color: $orange;
+      transition: 0.5s;
+      color: $white;
+    }
+  }
+  label {
+    color: $white;
+  }
+  input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid $white;
+    color: $white;
+    background: $secondary;
+    &:focus {
+      outline: 2px solid $blue;
+    }
+  }
 }
 
 .inputError {
@@ -13,13 +62,17 @@
   }
 }
 
-.sesionGoogle {
+.secIcons {
   display: flex;
-  flex-direction: column;
   gap: 10px;
-  align-items: center;
-  img {
-    width: 60px;
-    height: 60px;
+  .icons {
+    color: $white;
+    font-size: 50px;
+    cursor: pointer;
+    transition: 0.5s;
+    &:hover {
+      color: $yellow;
+      transition: 0.5s;
+    }
   }
 }

@@ -8,3 +8,12 @@ export const userTypes = {
 export const loadingTypes = {
   TOGGLE_LOADING: "TOGGLE_LOADING",
 };
+
+export const modal = {
+  SHOW_MODAL: "SHOW_MODAL",
+};
+
+export const todoListType = {
+  CREATE_TASK: "CREATE_TASK",
+  READ_TASKS: "READ_TASKS",
+};
