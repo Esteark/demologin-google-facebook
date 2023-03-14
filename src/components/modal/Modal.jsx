@@ -2,14 +2,17 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleModalAction } from "../../redux/actions/loadingActions";
-import { createTaskActionAsync } from "../../redux/actions/taskActions";
+import {
+  createTaskActionAsync,
+  editTaskAction,
+  updateTaskActionAsync,
+} from "../../redux/actions/taskActions";
 import store from "../../redux/store/store";
-import Toastify from "toastify-js";
-import "toastify-js/src/toastify.css";
 
 const Modal = () => {
   const { modal } = useSelector((store) => store.modal);
-  const { status } = useSelector((store) => store.task);
+  const { current } = useSelector((store) => store.task);
+
   const dispatch = useDispatch();
   const {
     register,
@@ -18,41 +21,28 @@ const Modal = () => {
     reset,
   } = useForm();
 
-  const handleSubmitForm = (data) => {
-    dispatch(createTaskActionAsync(data));
-  };
-
   useEffect(() => {
-    if (status === "success") {
-      Toastify({
-        text: "Producto agregado satisfactoriamente",
-        duration: 3000,
-        close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "left", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-          background: "linear-gradient(to right, #00b09b, #96c93d)",
-        },
-        onClick: function () {}, // Callback after click
-      }).showToast();
-      dispatch(toggleModalAction());
+    reset({
+      nameTask: current.nameTask || "",
+      descriptionTask: current.descriptionTask || "",
+    });
+  }, [current]);
+
+  const handleSubmitForm = (data) => {
+    if (current?.id) {
+      dispatch(
+        updateTaskActionAsync({
+          ...data,
+          id: current.id,
+        })
+      );
+    } else {
+      dispatch(createTaskActionAsync(data));
       reset({ nameTask: "", descriptionTask: "" });
-    } else if (status === "error") {
-      Toastify({
-        text: "Ups Ocurrió un Error al intentar procesar la solicitud",
-        duration: 3000,
-        close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "left", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-          background: "linear-gradient(to right,#FF1B1B , #FFCB1B)",
-        },
-        onClick: function () {}, // Callback after click
-      }).showToast();
     }
-  }, [status]);
+
+    dispatch(editTaskAction({}));
+  };
 
   return (
     <>
@@ -114,7 +104,10 @@ const Modal = () => {
                   <button
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    onClick={() => dispatch(toggleModalAction())}
+                    onClick={() => {
+                      dispatch(toggleModalAction());
+                      dispatch(editTaskAction({}));
+                    }}
                   >
                     Cerrar
                   </button>

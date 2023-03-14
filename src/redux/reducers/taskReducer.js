@@ -2,6 +2,7 @@ import { todoListType } from "../types/userTypes";
 const initialState = {
   tasks: [],
   status: "cargando",
+  current: {},
 };
 
 export const taskReducer = (state = initialState, action) => {
@@ -17,6 +18,32 @@ export const taskReducer = (state = initialState, action) => {
       return {
         ...state,
         tasks: [...action.payload],
+      };
+
+    case todoListType.DELETE_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.filter((task) => task.id !== action.payload.id),
+        status: action.payload.status,
+      };
+
+    case todoListType.EDIT_TASK:
+      return {
+        ...state,
+        current: action.payload,
+      };
+
+    case todoListType.UPDATE_TASK:
+      const dummyTasks = [...state.tasks];
+      const taskIndex = dummyTasks.findIndex(
+        (task) => task.id === action.payload.task.id
+      );
+      dummyTasks[taskIndex] = action.payload.task;
+
+      return {
+        ...state,
+        tasks: [...dummyTasks],
+        status: action.payload.status,
       };
 
     default:

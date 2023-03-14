@@ -16,4 +16,7 @@ export const modal = {
 export const todoListType = {
   CREATE_TASK: "CREATE_TASK",
   READ_TASKS: "READ_TASKS",
+  DELETE_TASK: "DELETE_TASK",
+  EDIT_TASK: "EDIT_TASK",
+  UPDATE_TASK: "UPDATE_TASK",
 };
